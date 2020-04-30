@@ -41,21 +41,26 @@ import java.util.List;
 public class StudentWebservice extends HttpServlet {
 
     private ObjectMapper mapper = new ObjectMapper();
-    private StudentService studentService;
+    private StudentService studentService = new StudentServiceImpl();
 
     /**
      * Retrieves All the Students
-     *
      * @return Student
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
-        List<Student> studentList = null;
-        studentService = new StudentServiceImpl();
+        String json = null;
+        String param = request.getParameter("id");
 
-        studentList = studentService.loadAll();
+        if (param != null) {
+            int id = Integer.valueOf(param);
+            Student student = studentService.findById(id);
+            json = mapper.writeValueAsString(student);
+        } else {
+            List<Student> studentList = studentService.findAll();
+            json = mapper.writeValueAsString(studentList);
+        }
 
-        String json = mapper.writeValueAsString(studentList);
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().print(json);

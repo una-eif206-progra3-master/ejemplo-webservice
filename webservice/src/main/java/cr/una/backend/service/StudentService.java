@@ -25,5 +25,6 @@ import cr.una.backend.model.Student;
 import java.util.List;
 
 public interface StudentService {
-    public List<Student> loadAll();
+    public List<Student> findAll();
+    public Student findById(int id);
 }

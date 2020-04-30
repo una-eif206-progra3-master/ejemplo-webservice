@@ -26,11 +26,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StudentServiceImpl implements StudentService {
+    List<Student> listStudents = new ArrayList<Student>();
 
     @Override
-    public List<Student> loadAll() {
-        List<Student> listStudents = new ArrayList<Student>();
-
+    public List<Student> findAll() {
         Student student1 = new Student(123, "Sebastian Rojas", "Progra 3", "A+");
         Student student2 = new Student(122, "Emma Sanchez", "Progra 3", "B+");
 
@@ -38,6 +37,24 @@ public class StudentServiceImpl implements StudentService {
         listStudents.add(student2);
 
         return listStudents;
+    }
+
+    @Override
+    public Student findById(int id) {
+        Student student = null;
+        Student student1 = new Student(123, "Sebastian Rojas", "Progra 3", "A+");
+        Student student2 = new Student(122, "Emma Sanchez", "Progra 3", "B+");
+
+        listStudents.add(student1);
+        listStudents.add(student2);
+
+        for (Student studentItem: listStudents) {
+            if (studentItem.getId()==id) {
+                student = studentItem;
+            }
+        }
+
+        return student;
     }
 
 }
