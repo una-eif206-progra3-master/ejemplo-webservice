@@ -45,6 +45,8 @@ public class StudentWebservice extends HttpServlet {
 
     /**
      * Retrieves All the Students
+     * URL/students
+     * URL/students?id=1
      * @return Student
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
